@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+#
+# The 'compile' script is executed by the slug compiler with three arguments:
+#
+# - $1: build_dir, location of your app directory on the build dyno
+# - $2: cache_dir, directory on the build dyno that persists between builds
+# - $3: env_dir, directory holding all the app's config vars as files
+#
+# More information here: https://devcenter.heroku.com/articles/buildpack-api
+#------------------------------------------------------------------------------#
+
+set -euo pipefail
+
+# debug
+# set -x
+
+# clean up leaking environment
+unset GIT_DIR
+
+function log() {
+    echo "-----> $*"
+}
+
+function indent() {
+    sed -e 's/^/       /'
+}
+
+# parse and derive params
+BUILD_DIR=$1
+CACHE_DIR=$2
+ENV_DIR=$3
+BUILDPACK_DIR="$(dirname "$(dirname "$0")")"
+
+
+# replace ${version} with the desired version
+wget https://github.com/OpenSCAP/openscap/releases/download/1.3.10/openscap-1.3.10.tar.gz
+tar -xzpf openscap-1.3.10.tar.gz
+cd openscap-1.3.10
+mkdir -p build
+
+cd build/
+cmake ../
+make
+make install
