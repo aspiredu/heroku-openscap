@@ -38,10 +38,12 @@ tar -xzpf openscap-1.3.10.tar.gz
 cd openscap-1.3.10
 mkdir -p build
 
+
 cd build/
 log "Current build dir: $BUILD_DIR"
 log "Current cmake: $(which cmake)"
-log "cmake"
+hash -r
+log "cmake $(cmake --version)"
 ln -s "$BUILD_DIR/.apt/usr/share/cmake" "$BUILD_DIR/.apt/usr/share/cmake-3.22"
 cmake ../
 log "make"
