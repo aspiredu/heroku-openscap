@@ -39,11 +39,12 @@ cd openscap-1.3.10
 mkdir -p build
 
 cd build/
-log "Current directory: $PWD"
+log "Current build dir: $BUILD_DIR"
 log "Current cmake: $(which cmake)"
 log "cmake"
-/app/.apt/usr/bin/cmake ../
+ln -s "$BUILD_DIR/.apt/usr/share/cmake" "$BUILD_DIR/.apt/usr/share/cmake-3.22"
+cmake ../
 log "make"
-/app/.apt/usr/bin/make
+make
 log "make install"
-/app/.apt/usr/bin/make install
+make install
