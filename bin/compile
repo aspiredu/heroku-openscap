@@ -31,6 +31,7 @@ CACHE_DIR=$2
 ENV_DIR=$3
 BUILDPACK_DIR="$(dirname "$(dirname "$0")")"
 
+apt-get update && apt-get install -y cmake libdbus-1-dev libdbus-glib-1-dev libcurl4-openssl-dev libgcrypt20-dev libselinux1-dev libxslt1-dev libgconf2-dev libacl1-dev libblkid-dev libcap-dev libxml2-dev libldap2-dev libpcre3-dev python-dev-is-python3 swig libxml-parser-perl libxml-xpath-perl libperl-dev libbz2-dev librpm-dev g++ libyaml-dev libxmlsec1-dev libxmlsec1-openssl libpcre2-dev
 
 # replace ${version} with the desired version
 wget https://github.com/OpenSCAP/openscap/releases/download/1.3.10/openscap-1.3.10.tar.gz
@@ -39,15 +40,8 @@ cd openscap-1.3.10
 mkdir -p build
 cd build/
 
-
-log "Current apt: $(which apt)"
-log "Current apt-get: $(which apt-get)"
-log "Current build dir: $BUILD_DIR"
-log "Current cmake: $(which cmake)"
 hash -r
 log "cmake $(cmake --version)"
-log "$(ls "$BUILD_DIR/.apt/usr/share")"
-ln -s "$BUILD_DIR/.apt/usr/share/cmake" "$BUILD_DIR/.apt/usr/share/cmake-3.22"
 cmake ../
 log "make"
 make
