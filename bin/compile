@@ -42,8 +42,8 @@ cd build/
 log "Current directory: $PWD"
 log "Current cmake: $(which cmake)"
 log "cmake"
-cmake ../
+/app/.apt/usr/bin/cmake ../
 log "make"
-make
+/app/.apt/usr/bin/make
 log "make install"
-make install
+/app/.apt/usr/bin/make install
