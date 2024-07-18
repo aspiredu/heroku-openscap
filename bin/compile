@@ -39,6 +39,11 @@ cd openscap-1.3.10
 mkdir -p build
 
 cd build/
-CMAKE_ROOT="$BUILD_DIR/.apt/usr/share/cmake" cmake ../
+log "Current directory: $PWD"
+log "Current cmake: $(which cmake)"
+log "cmake"
+cmake ../
+log "make"
 make
+log "make install"
 make install
